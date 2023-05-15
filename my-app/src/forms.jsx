@@ -23,13 +23,63 @@ function Form (props) {
     }
     return errors;
   }
+
+  const handleChange = field => {
+    return (e) => {
+      switch(field){
+        case "firstName":
+          setFirstName(e.target.value);
+          break;
+        case "email":
+          setEmail(e.target.value);
+          break;
+        case "phoneNumber":
+          setPhoneNumber(e.target.value);
+          break;
+          default:
+          break;
+      }
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let errors = validate();
+
+    if (errors.length > 0) {
+      setErrorMessages(errors);
+    } else {
+      let user = {
+        firstName,
+        email,
+        phoneNumber
+      };
+      console.log(user);
+    }
+  }
+
+  const showErrors = () => {
+    if (!errorMessages.length) {
+      return null;
+    } else {
+      return (
+        <ul>
+          {errorMessages.map((error, i) => <li key = {i}>{error}</li>)}
+        </ul>
+      )
+    }
+  }
+
  
   return (
     <form>
-      <h1> name </h1>,
-      <h1> email </h1>,
-      <h1> phone number </h1>,
-      
+      {/* <h1> name </h1>, */}
+      <input type = "text" placeholder="name" value = {firstName} onChange={handleChange('firstName')}></input>
+      <input type = "text" placeholder="email" value = {email} onChange={handleChange('email')}></input>
+      <input type = "text" placeholder="PhoneNumber" value = {phoneNumber} onChange={handleChange('phoneNumber')}></input>
+
+
       
       <div className = "dropdown">
         <button className = "dropbtn">dropdown</button>,
@@ -46,6 +96,7 @@ function Form (props) {
       <p class = "container"> <input type = "checkbox" /> <span class = "checkmark"></span>check for email
       email notifications</p>
       {/* <input type = "checkbox" id = "email_notifications" name = "email_notifications">email</input> */}
+      <button>Submit</button>
     </form>
   )
 }
