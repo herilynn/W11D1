@@ -6,6 +6,8 @@ function Form (props) {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [instructor, setInstructor] = useState(false);
+  const [student, setStudent] = useState(false);
 
   const [errorMessages, setErrorMessages] = useState([]);
 
@@ -15,11 +17,17 @@ function Form (props) {
     if (firstName.length === 0) {
       errors.push("First name can't be empty");
     }
-    if (email.length === 0) {
+    if (email.length === 0 ) {
       errors.push("Email can't be empty");
     }
     if (phoneNumber.length !== 10) {
       errors.push("Phone number should only be 10 digits")
+    }
+    if (instructor === false) {
+      errors.push("Must identify as a instructor or student")
+    }
+    if (student === false) {
+      errors.push("Must identify as a instructor or student")
     }
     return errors;
   }
@@ -36,8 +44,16 @@ function Form (props) {
         case "phoneNumber":
           setPhoneNumber(e.target.value);
           break;
+        case "instructor":
+          setInstructor(e.target.value);
+          break;
+        case "student":
+          setStudent(e.target.value);
+          break;
+
           default:
           break;
+        
       }
     }
   }
@@ -83,17 +99,24 @@ function Form (props) {
 
 
       
-      <div className = "dropdown">
-        <button className = "dropbtn">dropdown</button>,
+      {/* <div className = "dropdown">
+        <button onClick="myFunction()" className = "dropbtn">dropdown</button>,
         <div className = "dropdown-content">
           <a href = "#">Home</a>
           <a href = "#">Work</a>
           <a href = "#">Mobile</a>
         </div>
-      </div>,
+      </div>, */}
+
+      <select>
+        <option value = "Mobile"> Mobile </option>
+        <option value = "Home"> Home </option>
+        <option value = "Work"> Work </option>
+      </select>
+
       <h1> Staff </h1>,
-      <p class = "container"><input type = "radio" value = "instructor" checked = {props.selectOption === 'instructor'} onChange={props.handleChange} />Instructor</p>,
-      <p class = "container"><input type = "radio" value = "student" checked = {props.selectOption === 'student'} onChange={props.handleChange} />Student</p>,
+      <p class = "container"><input type = "radio" name = "staff" value = "instructor" onChange={handleChange('instructor')} />Instructor</p>,
+      <p class = "container"><input type = "radio" name = "staff" value = "student" onChange={handleChange('student')} />Student</p>,
       <textarea id = "bio" name = "bio" rows = "4" cols = "70"></textarea>,
       <p class = "container"> <input type = "checkbox" /> <span class = "checkmark"></span>check for email
       email notifications</p>
