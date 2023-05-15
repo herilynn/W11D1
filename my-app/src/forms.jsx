@@ -17,7 +17,7 @@ function Form (props) {
     if (firstName.length === 0) {
       errors.push("First name can't be empty");
     }
-    if (email.length === 0 ) {
+    if (email.length === 0) {
       errors.push("Email can't be empty");
     }
     if (phoneNumber.length !== 10) {
@@ -28,6 +28,14 @@ function Form (props) {
     }
     if (student === false) {
       errors.push("Must identify as a instructor or student")
+    }
+
+    if (!parseInt(phoneNumber)) {
+      errors.push("Phone Number must be all numbers")
+    }
+
+    if(email.split("@").length !== 2) {
+      errors.push("Invalid email")
     }
     return errors;
   }
