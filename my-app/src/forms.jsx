@@ -73,7 +73,9 @@ function Form (props) {
 
  
   return (
-    <form>
+    <>
+    {showErrors()}
+    <form className = 'form' onSubmit={handleSubmit}>
       {/* <h1> name </h1>, */}
       <input type = "text" placeholder="name" value = {firstName} onChange={handleChange('firstName')}></input>
       <input type = "text" placeholder="email" value = {email} onChange={handleChange('email')}></input>
@@ -92,12 +94,14 @@ function Form (props) {
       <h1> Staff </h1>,
       <p class = "container"><input type = "radio" value = "instructor" checked = {props.selectOption === 'instructor'} onChange={props.handleChange} />Instructor</p>,
       <p class = "container"><input type = "radio" value = "student" checked = {props.selectOption === 'student'} onChange={props.handleChange} />Student</p>,
-      <textarea id = "bio" name = "bio" rows = "4" cols = "50"></textarea>,
+      <textarea id = "bio" name = "bio" rows = "4" cols = "70"></textarea>,
       <p class = "container"> <input type = "checkbox" /> <span class = "checkmark"></span>check for email
       email notifications</p>
       {/* <input type = "checkbox" id = "email_notifications" name = "email_notifications">email</input> */}
       <button>Submit</button>
     </form>
+    </>
+    
   )
 }
 
